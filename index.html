@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Mike Sopper's Grips Pro Shop - Demo</title>
+<title>Mike Sopper's Grips Pro Shop | Customer & Drilling Records</title>
 <style>
-:root{--blue:#1167a8;--blue2:#0b558d;--ink:#20303c;--muted:#66737e;--line:#d9e1e7;--bg:#f3f6f8;--green:#237a4b}
+:root{--blue:#153b63;--blue2:#0d2d4d;--ink:#1e2933;--muted:#66737e;--line:#d9e1e7;--bg:#f4f6f8;--green:#237a4b;--accent:#c51f2a}
 *{box-sizing:border-box}body{margin:0;font:17px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
 button,input{font:inherit}button{border:0;border-radius:12px;min-height:50px;font-weight:800;cursor:pointer}
 .primary{background:var(--blue);color:#fff;padding:0 20px}.secondary{background:#edf2f5;color:var(--ink);padding:0 16px}
 header{background:#fff;border-bottom:1px solid var(--line);padding:12px max(16px,calc((100% - 1000px)/2));display:flex;align-items:center;justify-content:space-between;position:sticky;top:0}
-.brand{font-weight:900;font-size:19px}.shop{color:var(--muted);font-size:14px}.wrap{max-width:1000px;margin:28px auto;padding:0 16px}
+.brand{font-weight:900;font-size:19px;display:flex;align-items:center;gap:10px}.brand-word{letter-spacing:.08em}.brand-word strong{color:var(--accent)}.shop{color:var(--muted);font-size:14px;text-align:right}.shop small{display:block;font-size:11px;margin-top:2px}.wrap{max-width:1000px;margin:28px auto;padding:0 16px}
 .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(30,50,70,.05)}
-.login-shell{min-height:100vh;display:grid;place-items:center;padding:20px}.login{width:min(460px,100%)}.logo{text-align:center;font-size:48px}
+.login-shell{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#eef2f5,#ffffff)}.login{width:min(500px,100%)}.logo{text-align:center;font-size:48px}.grips-title{text-align:center;font-size:34px;line-height:1.05;margin-bottom:8px}.grips-title .grip{color:var(--accent);letter-spacing:.08em}.tagline{text-align:center;font-size:18px;font-weight:800;color:var(--blue);margin-bottom:18px}.contact-card{background:#f7f9fb;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:14px 0;font-size:14px}
 h1,h2,h3,p{margin-top:0}.muted{color:var(--muted)}.note{background:#fff8e6;border:1px solid #ead9a7;border-radius:12px;padding:12px;margin:16px 0}
 .field{display:block;font-weight:700;margin:12px 0}.field input{width:100%;padding:14px;border:1px solid #b9c5ce;border-radius:11px;margin-top:6px}
 .toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;margin:18px 0}.search{width:100%;min-height:56px;border:1px solid #b9c5ce;border-radius:11px;padding:0 14px;font-size:18px}
@@ -32,9 +32,9 @@ const customers=[
 ];
 let logged=false,selected=null,q="";
 const app=document.getElementById("app");
-function shell(x){return '<header><div class="brand">🎳 Pro Shop Records</div><div class="shop">Mike Sopper\'s Grips Pro Shop</div></header><main class="wrap">'+x+'</main>'}
+function shell(x){return '<header><div class="brand">🎳 <span class="brand-word">MIKE SOPPER\'S <strong>GRIPS</strong></span></div><div class="shop">Customer & Drilling Records<small>Get a GRIP on your game</small></div></header><main class="wrap">'+x+'</main>'}
 function render(){
-if(!logged){app.innerHTML='<div class="login-shell"><section class="card login"><div class="logo">🎳</div><h1 style="text-align:center">Pro Shop Records</h1><p class="muted" style="text-align:center">Mike Sopper\'s Grips Pro Shop</p><div class="note"><b>Demo for Mike</b><br>Working prototype with sample customers. No setup needed.</div><label class="field">Email<input value="demo@proshop.com"></label><label class="field">Password<input type="password" value="demo1234"></label><button class="primary" style="width:100%" onclick="logged=true;render()">OPEN SHOP RECORDS</button><p class="muted" style="text-align:center;margin-top:14px;font-size:13px">Prototype only · sample data</p></section></div>';return}
+if(!logged){app.innerHTML='<div class="login-shell"><section class="card login"><div class="logo">🎳</div><div class="grips-title">MIKE SOPPER\'S <span class="grip">GRIPS</span></div><div class="tagline">Get a GRIP on your game</div><p class="muted" style="text-align:center">Customer & Drilling Records</p><div class="contact-card"><b>Funway Entertainment Center</b><br>1335 S. River St (Rt. 25), Batavia, IL 60510<br>630.879.8730<br><span class="muted">Wed/Thu 2–7 · Fri 9–1:30 · Sat 10:30–1:30</span></div><div class="note"><b>Demo</b><br>Working prototype with sample customers. No setup needed.</div><label class="field">Email<input value="demo@proshop.com"></label><label class="field">Password<input type="password" value="demo1234"></label><button class="primary" style="width:100%" onclick="logged=true;render()">OPEN SHOP RECORDS</button><p class="muted" style="text-align:center;margin-top:14px;font-size:13px">Prototype only · sample data</p></section></div>';return}
 if(selected!==null){renderProfile();return}
 const rows=customers.filter(c=>(c.name+" "+c.phone).toLowerCase().includes(q.toLowerCase()));
 app.innerHTML=shell('<div class="top"><div><h1>Customers</h1><p class="muted">Find a bowler in seconds by name or phone number.</p></div><span class="pill">'+customers.length+' demo customers</span></div><div class="demo-guide"><b>Easy demo path:</b> search for <b>John Smith</b>, open his record, review measurements and purchase history.</div><div class="toolbar"><input class="search" id="search" placeholder="Search name or phone..." value="'+q.replace(/"/g,'&quot;')+'"><button class="primary" onclick="alert(\'New customer form is included in the full prototype.\')">+ NEW CUSTOMER</button></div><div class="list">'+rows.map((c,i)=>'<button class="row" onclick="selected='+customers.indexOf(c)+';render()"><div><b>'+c.name+'</b><span>'+c.phone+'</span></div><div><span>Measured '+c.measured+'</span></div></button>').join('')+'</div>');
